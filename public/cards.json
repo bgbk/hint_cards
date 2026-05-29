@@ -1,0 +1,130 @@
+{
+  "LF1":  { "label": "Das Unternehmen und die eigene Rolle im Betrieb beschreiben",                "topics": {} },
+  "LF2":  { "label": "Arbeitsplätze nach Kundenwunsch ausstatten",     "topics": {} },
+  "LF3":  { "label": "Clients in Netzwerke einbinden",                "topics": {} },
+  "LF4":  { "label": "Schutzbedarfsanalyse im eigenen Arbeitsbereich","topics": {} },
+  "LF5":  { "label": "Software zur Verwaltung von Daten anpassen",        "topics": {} },
+  "LF6":  { "label": "Serviceanfragen bearbeiten",                    "topics": {} },
+  "LF7":  { "label": "Cyber-physische Systeme ergänzen",              "topics": {} },
+  "LF8":  { "label": "Daten systemübergreifend bereitstellen",           "topics": {} },
+  "LF9":  { "label": "Netzwerke und Dienste bereitstellen",               "topics": {} },
+
+  "LF10": {
+    "label": "Serverdienste bereitstellen und Administrationsaufgaben automatisieren",
+    "topics": {
+      "FTP": [
+        {
+          "title": "Was ist FTP?",
+          "text": "FTP (File Transfer Protocol) ist ein Netzwerkprotokoll zur Übertragung von Dateien zwischen einem Client und einem Server.\n\nWichtigste Eigenschaften:\n– Anwendungsschicht (OSI-Schicht 7)\n– Nutzt TCP als Transportprotokoll\n– Zwei getrennte Verbindungen:\n   Steuerkanal (Port 21) und Datenkanal (Port 20 oder dynamisch)\n– Klartextübertragung – kein Schutz vor Mitlesen\n   (Sichere Alternative: SFTP oder FTPS)",
+          "image": null,
+          "image_caption": null,
+          "code": "Client  ──Port 21──►  Server   (Steuerkanal: Befehle)\nClient  ◄─Port 20──   Server   (Datenkanal:  Dateien)",
+          "link": "https://www.elektronik-kompendium.de/sites/net/0902241.htm"
+        },
+        {
+          "title": "FTP-Server in Packet Tracer einrichten",
+          "text": "Einen FTP-Server in Cisco Packet Tracer aktivieren und konfigurieren:\n\n1. Server-Gerät anklicken → Reiter 'Services'\n2. Dienst 'FTP' auswählen → ON aktivieren\n3. Benutzer anlegen: Username, Password, Berechtigungen\n4. IP-Adresse des Servers notieren\n\nTest vom Client im gleichen Netz → Command Prompt → ftp <IP>",
+          "image": null,
+          "image_caption": null,
+          "code": "Services → FTP → ON\n\nUser:        admin\nPassword:    cisco\nPermissions: Read  Write  List",
+          "link": null
+        },
+        {
+          "title": "FTP-Befehle im Command Prompt",
+          "text": "FTP-Verbindung von einem PC herstellen und Dateien übertragen:\n\n1. PC anklicken → Desktop → Command Prompt\n2. Verbindung aufbauen mit: ftp <IP-Adresse>\n3. Login mit Username und Password\n4. Befehle eingeben",
+          "image": null,
+          "image_caption": null,
+          "code": "C:\\> ftp 192.168.1.10\nUsername: admin\nPassword: cisco\n\nftp> dir               (Verzeichnis anzeigen)\nftp> get datei.txt     (Datei herunterladen)\nftp> put bericht.txt   (Datei hochladen)\nftp> quit              (Verbindung beenden)",
+          "link": null
+        },
+        {
+          "title": "Zugriff aus anderem Netz – Routing prüfen",
+          "text": "Soll ein Client aus einem anderen Netz auf den FTP-Server zugreifen, muss zuerst das Routing stimmen:\n\n1. Prüfen ob das Default Gateway korrekt gesetzt ist.\n2. Erreichbarkeit mit ping testen\n\nErst wenn ping funktioniert → weiter mit der Router-Konfiguration.",
+          "image": null,
+          "image_caption": null,
+          "code": "ping 13.13.13.2",
+          "link": null
+        },
+        {
+          "title": "NAT: FTP-Zugriff aus anderem Netz erlauben",
+          "text": "Gezielt FTP-Verkehr (TCP Port 20 + 21) zum FTP-Server erlauben. Alle anderen Verbindungen bleiben gesperrt.\n\nDies wird am Router konfiguriert.",
+          "image": null,
+          "image_caption": null,
+          "code": "Router(config)# ip nat inside source static tcp 10.10.10.253 20 13.13.13.2 20\nRouter(config)# ip nat inside source static tcp 10.10.10.253 21 13.13.13.2 21",
+          "link": null
+        }
+      ],
+      "DNS": [
+        {
+          "title": "Netzwerk verstehen und IPs ermitteln",
+          "text": "Klären: Unter welcher IP ist der Webserver von extern zu erreichen?\n\nMit ping Verbindungen überprüfen\n\nDie Edge Router nutzen NAT, um mehrere Geräte in einem Netzwerk über eine einzige öffentliche IP-Adresse mit dem Internet zu verbinden.",
+          "image": null,
+          "image_caption": null,
+          "code": "ping <ip>",
+          "link": null
+        },
+        {
+          "title": "2. Dem Host die local DNS Adresse mitteilen",
+          "text": "",
+          "image": null,
+          "image_caption": null,
+          "code": "Config -> Settings",
+          "link": null
+        },
+        {
+          "title": "Local und public DNS aktivieren und konfigurieren",
+          "text": "",
+          "image": null,
+          "image_caption": null,
+          "code": "Services -> DNS",
+          "link": null
+        },
+        {
+          "title": "DNS-Einstellungen",
+          "text": "Der local DNS benötigt:\n1. NS-Record\n2. A-Record\n\nDer public DNS benötigt einen A-Record.\n\nHinweis: Die nächsten Karten enthalten die Lösungen.",
+          "image": null,
+          "image_caption": null,
+          "code": null,
+          "link": null
+        },
+        {
+          "title": "Lösung: local DNS",
+          "text": "",
+          "image": "img/localdns-final.png",
+          "image_caption": "Lösung local DNS",
+          "code": null,
+          "link": null
+        },
+        {
+          "title": "Lösung: public DNS",
+          "text": "",
+          "image": "img/publicdns-final.png",
+          "image_caption": "Lösung public DNS",
+          "code": null,
+          "link": null
+        }
+      ],
+      "E-Mail": [
+        {
+    "title": "Allgemeine Informationen",
+    "text": "Ein E-Mail-Server ermöglicht das Senden, Empfangen und Speichern von E-Mails.\nEr arbeitet nach dem Client-Server-Prinzip: Ein E-Mail-Client (z. B. Outlook oder Thunderbird) kommuniziert mit dem Server, um Nachrichten zu übertragen oder abzurufen.\nE-Mail-Server bestehen oft aus mehreren Komponenten wie SMTP-Servern für den Versand und IMAP- oder POP3-Servern für den Empfang.",
+    "image": null,
+    "image_caption": null,
+    "code": null,
+    "link": "https://de.wikipedia.org/wiki/E-Mail"
+        },
+        {
+    "title": "Relevante Protokolle mit Ports",
+    "text": "Für die E-Mail-Kommunikation werden verschiedene Protokolle verwendet:\nSMTP (Simple Mail Transfer Protocol) für den Versand von E-Mails (Ports: 25, 587, 465)\nPOP3 (Post Office Protocol Version 3) zum Abrufen von E-Mails (Ports: 110, 995)\nIMAP (Internet Message Access Protocol) für den Zugriff auf E-Mails direkt auf dem Server (Ports: 143, 993)\nVerschlüsselte Verbindungen nutzen meist SSL/TLS.",
+    "image": null,
+    "image_caption": null,
+    "code": null,
+    "link": "https://www.cloudflare.com/de-de/learning/email-security/smtp-port-25-587/"
+        }
+      ]
+    }
+  },
+
+  "LF11": { "label": "Betrieb und Sicherheit vernetzter Systeme gewährleisten",   "topics": {} },
+  "LF12": { "label": "Kundenspezifische Systemintegration durchführen", "topics": {} }
+}
